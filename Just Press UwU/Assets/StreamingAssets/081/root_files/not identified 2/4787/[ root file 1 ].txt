@@ -1,0 +1,12 @@
+pix 0 [ 074659 ] - none
+pix 1 [ 074660 ] - none
+pix 2 [ 047659 ] - none
+pix 3 [ 071124 ] - none
+pix 4 [ 009006 ] - none
+pix 5 [ reboot ] - none
+pix 6 [ 015794 ] - none
+pix 7 [ 045395 ] - none
+pix 8 [ 038476 ] - none
+pix 9 [ 010106 ] - none
+
+>

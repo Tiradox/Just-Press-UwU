@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Post Processing
+  - Ground
+  - REN
+  - UIup
+  - int
+  - Player
+  - Enemy
+  - trigger
+  - BG
+  - BG2
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 3490186765
+    locked: 0
+  - name: 'AfterGround '
+    uniqueID: 1019156901
+    locked: 0
+  - name: Furniture
+    uniqueID: 2463336501
+    locked: 0
+  - name: Enemy
+    uniqueID: 3267744857
+    locked: 0
+  - name: Player
+    uniqueID: 2649391491
+    locked: 0
+  - name: Ground
+    uniqueID: 231779831
+    locked: 0
+  - name: UIDown
+    uniqueID: 929174733
+    locked: 0
+  - name: GroundUp
+    uniqueID: 414058749
+    locked: 0
+  - name: REN
+    uniqueID: 3746841707
+    locked: 0
+  - name: UIUp
+    uniqueID: 4071391573
+    locked: 0
