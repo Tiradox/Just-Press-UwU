@@ -38,6 +38,6 @@ public class SettingsSaveManager : MonoBehaviour
 [Serializable]
 public class SettingsSave
 {
-    public string language = "RUS";
-    public int gameStage = 0;
+    public string LanguageCode = "RUS";
+    public int GameStage = 0;
 }

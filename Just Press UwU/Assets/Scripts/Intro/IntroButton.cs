@@ -5,33 +5,17 @@ using TMPro;
 
 public class IntroButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private string _text;
-    [SerializeField] private bool _translated;
-
-    [Space]
     [SerializeField] private UnityEvent _onButtonDown;
 
     [Space]
     [SerializeField] private TMP_Text _textField;
 
-    private void Awake()
-    {
-        if (_translated)
-        {
-            GlobalEventManager.OnLocalizationLoaded += OnLocalizationLoaded;
-        }
-        else
-        {
-            _textField.text = _text;
-        }
-    }
+    private string _text;
 
-    private void OnDisable()
+    public void SetData(string text)
     {
-        if (_translated)
-        {
-            GlobalEventManager.OnLocalizationLoaded -= OnLocalizationLoaded;
-        }
+        _text = text;
+        _textField.text = text;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -46,11 +30,5 @@ public class IntroButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     {
         _textField.text = $"[{_text}]";
         _onButtonDown.Invoke();
-    }
-
-    private void OnLocalizationLoaded()
-    {
-        _text = "???";
-        _textField.text = _text;
     }
 }

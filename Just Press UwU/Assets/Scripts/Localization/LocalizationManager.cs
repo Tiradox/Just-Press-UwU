@@ -13,11 +13,43 @@ namespace Tiradox
 
         private static List<JsonString> _strings;
         private static List<LocalizationFont> _fonts;
+        private static LocalizationTextData[] _localizationsButtonsDatas;
         private static string _localizationPath;
 
         public static string[] GetLocalizationsCodes()
         {
-            return Directory.GetDirectories(Application.streamingAssetsPath + $"/Localizations");
+            string[] paths = Directory.GetDirectories(Application.streamingAssetsPath + $"\\Localizations");
+
+            for (int i = 0; i < paths.Length; i++)
+            {
+                paths[i] = paths[i].Replace('/', '\\');
+            }
+
+            return paths;
+        }
+
+        public static LocalizationTextData[] GetLocalizationsButtonsDatas(string fontIndex)
+        {
+            if (_localizationsButtonsDatas == null)
+            {
+                string[] localizationCodes = GetLocalizationsCodes();
+                LocalizationTextData[] localizationTextDatas = new LocalizationTextData[localizationCodes.Length];
+
+                for (int i = 0; i < localizationCodes.Length; i++)
+                {
+                    localizationTextDatas[i].Text = File.ReadAllText($"{localizationCodes[i]}/Name.txt");
+
+                    Debug.Log(Path.GetDirectoryName(localizationCodes[i]));
+                    localizationTextDatas[i].Font = GetFont(fontIndex, GetLocalizationFonts(Path.GetDirectoryName(localizationCodes[i]))); 
+                }
+
+                _localizationsButtonsDatas = localizationTextDatas;
+                return localizationTextDatas;
+            }
+            else
+            {
+                return _localizationsButtonsDatas;
+            }
         }
 
         public static void SetLocalization(string localizationCode)
@@ -56,7 +88,6 @@ namespace Tiradox
                 if (File.Exists(fontPath + ".json"))
                 {
                     fontData = JsonUtility.FromJson<TMP_FontAssetData>(File.ReadAllText(fontPath + ".json"));
-                    Debug.Log(fontData.RenderMode);
                 }
 
                 localizationFonts[i].Value = TMP_FontAssetImporter.GetByPath(fontPath + ".ttf", fontData);
@@ -93,6 +124,32 @@ namespace Tiradox
             else
             {
                 Debug.Log($"Font with index \"{index}\" does not exist in \"{thisLocalizationCode}\" localization");
+                return null;
+            }
+        }
+        public static TMP_FontAsset GetFont(string index, List<LocalizationFont> fonts = null)
+        {
+            if(fonts == null)
+            {
+                fonts = _fonts;
+            }
+
+            LocalizationFont str = fonts.Find(s => s.ID == index);
+
+            if (str != null)
+            {
+                return str.Value;
+            }
+            else
+            {
+                if(fonts != _fonts)
+                {
+                    Debug.Log($"Font with index \"{index}\" does not find");
+                }
+                else
+                {
+                    Debug.Log($"Font with index \"{index}\" does not exist in \"{thisLocalizationCode}\" localization");
+                }
                 return null;
             }
         }

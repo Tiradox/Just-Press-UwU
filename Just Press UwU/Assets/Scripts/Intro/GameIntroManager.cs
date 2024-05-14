@@ -17,8 +17,8 @@ public class GameIntroManager : MonoBehaviour
     [Header("Language Select panel")]
     [SerializeField] private GameObject _languageSelectPanel;
     [SerializeField] private TMP_Text _theTopTextOfTheTranslationScreen;
-    [SerializeField] private TMP_FontAsset Font1;
-    [SerializeField] private TMP_FontAsset Font2;
+    [SerializeField] private TMP_FontAsset _unicFont;
+    private List<LocalizationTextData> _localizationTopTextData;
 
     [Header("Attention panel")]
     [SerializeField] private GameObject _attentionPanel;
@@ -32,15 +32,16 @@ public class GameIntroManager : MonoBehaviour
     [SerializeField] private AudioSource _loadAS;
     [SerializeField] private AudioSource _bipAS;
 
-    private string _localizationPath;
     private List<string> fileLines;
 
     private bool _uCan = true;
 
     private void Start()
     {
-        if (SettingsSaveManager.settingsSave != null && SettingsSaveManager.settingsSave.gameStage > 0)
+        if (SettingsSaveManager.settingsSave != null && SettingsSaveManager.settingsSave.GameStage > 0)
         {
+            LocalizationManager.SetLocalization(SettingsSaveManager.settingsSave.LanguageCode);
+
             LoadSettings();
         }
         else
@@ -80,25 +81,33 @@ public class GameIntroManager : MonoBehaviour
         _loadingPanel.SetActive(false);
         _bgLines.SetActive(true);
         _languageSelectPanel.SetActive(true);
-        StartCoroutine(CycleOfTheTopTextOfTheTranslationScreen());
         _mainMusic.Play();
+
+        _localizationTopTextData = new List<LocalizationTextData>();
+        LocalizationTextData localizationTextData;
+        localizationTextData.Font = _unicFont;
+        localizationTextData.Text = "Language";
+        _localizationTopTextData.Add(localizationTextData);
+        _localizationTopTextData.AddRange(LocalizationManager.GetLocalizationsButtonsDatas("Default"));
+
+        StartCoroutine(CycleOfTheTopTextOfTheTranslationScreen());
     }
 
     private void LoadSettings()
     {
-        if(SettingsSaveManager.settingsSave.gameStage == 1)
+        if(SettingsSaveManager.settingsSave.GameStage == 1)
         {
             SceneManager.LoadScene("SampleScene");
         }
-        else if (SettingsSaveManager.settingsSave.gameStage == 2)
+        else if (SettingsSaveManager.settingsSave.GameStage == 2)
         {
             SceneManager.LoadScene("IntRL");
         }
-        else if (SettingsSaveManager.settingsSave.gameStage == 3)
+        else if (SettingsSaveManager.settingsSave.GameStage == 3)
         {
             SceneManager.LoadScene("PlayerReborn");
         }
-        else if (SettingsSaveManager.settingsSave.gameStage == 99)
+        else if (SettingsSaveManager.settingsSave.GameStage == 99)
         {
             SceneManager.LoadScene("Omega waiting room");
         }
@@ -108,25 +117,27 @@ public class GameIntroManager : MonoBehaviour
     {
         //Blaek.SetActive(true);
         yield return new WaitForSeconds(2f);
-        SettingsSaveManager.settingsSave.gameStage = 1;
+        SettingsSaveManager.settingsSave.GameStage = 1;
 
         SceneManager.LoadScene("SampleScene");
     }
 
     private IEnumerator CycleOfTheTopTextOfTheTranslationScreen()
     {
+        int i = 0;
+
         while(true)
         {
+            _theTopTextOfTheTranslationScreen.font = _localizationTopTextData[i].Font;
+            _theTopTextOfTheTranslationScreen.text = _localizationTopTextData[i].Text;
+
+            i++;
+            if (i >= _localizationTopTextData.Count)
+            {
+                i = 0;
+            }
+
             yield return new WaitForSeconds(1f);
-            _theTopTextOfTheTranslationScreen.text = "Язык";
-            yield return new WaitForSeconds(1f);
-            _theTopTextOfTheTranslationScreen.font = Font2;
-            _theTopTextOfTheTranslationScreen.text = "Language";
-            yield return new WaitForSeconds(1f);
-            _theTopTextOfTheTranslationScreen.font = Font1;
-            _theTopTextOfTheTranslationScreen.text = "Мова";
-            yield return new WaitForSeconds(1f);
-            _theTopTextOfTheTranslationScreen.text = "Language";
         }
     }
 
@@ -183,9 +194,9 @@ public class GameIntroManager : MonoBehaviour
         }
         _uCan = false;
 
-        SettingsSaveManager.settingsSave.language = localizationCode;
-        _localizationPath = Application.streamingAssetsPath + "/Localizations/" + SettingsSaveManager.settingsSave.language + "/UI/Settings.txt";
-        fileLines = File.ReadAllLines(_localizationPath).ToList();
+        SettingsSaveManager.settingsSave.LanguageCode = localizationCode;
+        LocalizationManager.SetLocalization(SettingsSaveManager.settingsSave.LanguageCode);
+        Debug.Log("1");
         StartCoroutine(Attention());
         _bipAS.Play();
     }
