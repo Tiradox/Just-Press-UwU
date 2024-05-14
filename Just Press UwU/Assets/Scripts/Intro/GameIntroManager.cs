@@ -20,10 +20,14 @@ public class GameIntroManager : MonoBehaviour
     [SerializeField] private Transform _translationScreenButtonsParent;
     [SerializeField] private GameObject _translationScreenButtonPrefab;
     [SerializeField] private TMP_FontAsset _unicFont;
+    [SerializeField] private TMP_FontAsset _defoultSmallFont;
     private List<LocalizationTextData> _localizationTopTextData;
 
     [Header("Attention panel")]
     [SerializeField] private GameObject _attentionPanel;
+    [SerializeField] private TMP_Text _attentionPanelTopText;
+    [SerializeField] private TMP_Text _attentionPanelDescroptionText;
+    [SerializeField] private IntroButton _attentionPanelNextButton;
 
     [Space]
     [SerializeField] private GameObject _bgLines;
@@ -33,8 +37,6 @@ public class GameIntroManager : MonoBehaviour
     [SerializeField] private AudioSource _mainMusic;
     [SerializeField] private AudioSource _loadAS;
     [SerializeField] private AudioSource _bipAS;
-
-    private List<string> fileLines;
 
     private bool _uCan = true;
 
@@ -97,7 +99,7 @@ public class GameIntroManager : MonoBehaviour
         for (int i = 0; i < localizationCodes.Length; i++)
         {
             IntroButton button = Instantiate(_translationScreenButtonPrefab, _translationScreenButtonsParent).GetComponent<IntroButton>();
-            button.SetData(localizationCodes[i], SetLocalization);
+            button.SetData(localizationCodes[i], _defoultSmallFont, SetLocalization);
         }
 
         StartCoroutine(CycleOfTheTopTextOfTheTranslationScreen());
@@ -121,15 +123,6 @@ public class GameIntroManager : MonoBehaviour
         {
             SceneManager.LoadScene("Omega waiting room");
         }
-    }
-
-    private IEnumerator Exit()
-    {
-        //Blaek.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        SettingsSaveManager.settingsSave.GameStage = 1;
-
-        SceneManager.LoadScene("SampleScene");
     }
 
     private IEnumerator CycleOfTheTopTextOfTheTranslationScreen()
@@ -157,45 +150,44 @@ public class GameIntroManager : MonoBehaviour
         _languageSelectPanel.SetActive(false);
         _attentionPanel.SetActive(true);
 
+        string[] attentionPanelDescroption = LocalizationManager.GetText("AttentionPanelDescroption").Split('&');
+        _attentionPanelDescroptionText.font = LocalizationManager.GetFont("Small");
+        _attentionPanelTopText.font = LocalizationManager.GetFont("Default");
+        _attentionPanelTopText.text = LocalizationManager.GetText("AttentionPanelTopText");
 
-        for (int i = 0; i != fileLines[1].Length; i++)
+        WaitForSeconds wrightWheit = new WaitForSeconds(0.005f);
+        for (int i = 0; i != attentionPanelDescroption[0].Length; i++)
         {
-            //DesTex.text += fileLines[1][i];
-            yield return new WaitForSeconds(0.01f);
+            _attentionPanelDescroptionText.text += attentionPanelDescroption[0][i];
+            yield return wrightWheit;
         }
 
         yield return new WaitForSeconds(1f);
-        //DesTex.text += "\n" + fileLines[2];
-        yield return new WaitForSeconds(0.2f);
-        //DesTex.text += "\n" + fileLines[3];
-        yield return new WaitForSeconds(0.2f);
-        //DesTex.text += "\n" + fileLines[4] + "\n\n";
-
-        for (int i = 0; i != fileLines[5].Length; i++)
+        for (int i = 1; i < attentionPanelDescroption.Length; i++)
         {
-            //DesTex.text += fileLines[5][i];
-            yield return new WaitForSeconds(0.01f);
+            _attentionPanelDescroptionText.text += attentionPanelDescroption[i];
+            yield return new WaitForSeconds(0.2f);
         }
 
-        //ButtonTex.text = fileLines[6];
-        _uCan = true;
+        yield return new WaitForSeconds(1f);
+        _attentionPanelNextButton.SetData(LocalizationManager.GetText("AttentionPanelButtonText"), LocalizationManager.GetFont("Small"), OnAttentionPanelButtonDown);
     }
-    public void AEn()
-    {
-        //ButtonTex.text =  "> " + fileLines[6];
-    }
-    public void AEx()
-    {
-        //ButtonTex.text = fileLines[6];
-    }
-    public void Ap()
+    public void OnAttentionPanelButtonDown(string s)
     {
         _mainMusic.Stop();
-        //bi.Play();
+        _bipAS.Play();
 
         StartCoroutine(Exit());
     }
+    private IEnumerator Exit()
+    {
+        _bgLines.SetActive(false);
+        _attentionPanel.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        SettingsSaveManager.settingsSave.GameStage = 1;
 
+        SceneManager.LoadScene("SampleScene");
+    }
     public void SetLocalization(string localizationCode)
     {
         if(!_uCan)

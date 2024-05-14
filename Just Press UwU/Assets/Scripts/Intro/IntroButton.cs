@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using TMPro;
 
@@ -13,10 +12,11 @@ public class IntroButton : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     private string _text;
 
-    public void SetData(string text, Action<string> function)
+    public void SetData(string text, TMP_FontAsset fontAsset, Action<string> function)
     {
         _text = text;
         _textField.text = text;
+        _textField.font = fontAsset;
         _onButtonDown = function;
     }
 

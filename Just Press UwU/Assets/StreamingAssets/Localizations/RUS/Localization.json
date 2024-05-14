@@ -1,7 +1,10 @@
 {
     "Items" : [
-	{ "ID":"TestText", "Value":"Тестовый текст :3" },
+	{ "ID":"AttentionPanelTopText", "Value":"!!! внимание !!!" },
+	{ "ID":"AttentionPanelDescroption", "Value":"Обязательно прочтите перед игрой.\n\nЗвук можно настроить через звуковую панель Windows.\n\nИгра содержит:\n& * Яркие вспышки\n& * Контрастные цвета\n& * Громкие звуки\n& * Элементы АРГ\n& * Заархивированные вирусы" },
+	{ "ID":"AttentionPanelButtonText", "Value":"принять" },
 	
+	{ "ID":"TestText", "Value":"Тестовый текст :3" },
 	{ "ID":"hole", "Value":" " },
 	{ "ID":"///", "Value":"///" }
 	]
