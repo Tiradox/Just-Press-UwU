@@ -22,7 +22,8 @@ namespace Tiradox
 
             for (int i = 0; i < paths.Length; i++)
             {
-                paths[i] = paths[i].Replace('/', '\\');
+                paths[i] = paths[i].Replace("/", "\\");
+                paths[i] = new DirectoryInfo(Path.GetDirectoryName(paths[i] + "\\")).Name;
             }
 
             return paths;
@@ -37,10 +38,8 @@ namespace Tiradox
 
                 for (int i = 0; i < localizationCodes.Length; i++)
                 {
-                    localizationTextDatas[i].Text = File.ReadAllText($"{localizationCodes[i]}/Name.txt");
-
-                    Debug.Log(Path.GetDirectoryName(localizationCodes[i]));
-                    localizationTextDatas[i].Font = GetFont(fontIndex, GetLocalizationFonts(Path.GetDirectoryName(localizationCodes[i]))); 
+                    localizationTextDatas[i].Text = File.ReadAllText(Application.streamingAssetsPath + $"/Localizations/{localizationCodes[i]}/Name.txt");
+                    localizationTextDatas[i].Font = GetFont(fontIndex, GetLocalizationFonts(localizationCodes[i])); 
                 }
 
                 _localizationsButtonsDatas = localizationTextDatas;

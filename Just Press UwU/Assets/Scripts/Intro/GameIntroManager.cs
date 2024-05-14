@@ -17,6 +17,8 @@ public class GameIntroManager : MonoBehaviour
     [Header("Language Select panel")]
     [SerializeField] private GameObject _languageSelectPanel;
     [SerializeField] private TMP_Text _theTopTextOfTheTranslationScreen;
+    [SerializeField] private Transform _translationScreenButtonsParent;
+    [SerializeField] private GameObject _translationScreenButtonPrefab;
     [SerializeField] private TMP_FontAsset _unicFont;
     private List<LocalizationTextData> _localizationTopTextData;
 
@@ -89,6 +91,14 @@ public class GameIntroManager : MonoBehaviour
         localizationTextData.Text = "Language";
         _localizationTopTextData.Add(localizationTextData);
         _localizationTopTextData.AddRange(LocalizationManager.GetLocalizationsButtonsDatas("Default"));
+
+        string[] localizationCodes = LocalizationManager.GetLocalizationsCodes();
+
+        for (int i = 0; i < localizationCodes.Length; i++)
+        {
+            IntroButton button = Instantiate(_translationScreenButtonPrefab, _translationScreenButtonsParent).GetComponent<IntroButton>();
+            button.SetData(localizationCodes[i], SetLocalization);
+        }
 
         StartCoroutine(CycleOfTheTopTextOfTheTranslationScreen());
     }
@@ -196,7 +206,6 @@ public class GameIntroManager : MonoBehaviour
 
         SettingsSaveManager.settingsSave.LanguageCode = localizationCode;
         LocalizationManager.SetLocalization(SettingsSaveManager.settingsSave.LanguageCode);
-        Debug.Log("1");
         StartCoroutine(Attention());
         _bipAS.Play();
     }

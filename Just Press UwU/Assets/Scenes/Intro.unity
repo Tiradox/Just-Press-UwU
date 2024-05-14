@@ -777,6 +777,9 @@ MonoBehaviour:
   _fillAniamtor: {fileID: 1313787889}
   _languageSelectPanel: {fileID: 1087000549}
   _theTopTextOfTheTranslationScreen: {fileID: 1658697440}
+  _translationScreenButtonsParent: {fileID: 657766731}
+  _translationScreenButtonPrefab: {fileID: 8221754606298223686, guid: d98273f60fce4fd46a534538bcb658a7,
+    type: 3}
   _unicFont: {fileID: 11400000, guid: 8726fb48494496e4fa18242dd109cc58, type: 2}
   _attentionPanel: {fileID: 1365239705}
   _bgLines: {fileID: 143703120}
