@@ -15,7 +15,7 @@ public class DieScreenManager : MonoBehaviour
 
     public void Start()
     {
-        fileLines = DS.DraftingАProposal("UI/Die.txt");
+        //fileLines = DS.DraftingАProposal("UI/Die.txt");
         StartCoroutine(IETex());
         txt2.text = fileLines[2];
     }

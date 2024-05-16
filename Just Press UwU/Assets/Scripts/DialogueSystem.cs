@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,25 +15,10 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] public GameObject MesBoxStrel;
     [SerializeField] private AudioSource AU;
 
-    protected List<string> fileLines;
-
     public bool YouCanCont = false;
     public bool DialogueIsGo = false;
 
     private string _currentText;
-
-    public List<string> DraftingАProposal(string path)
-    {
-        path = Application.streamingAssetsPath + "/_Text/" + SettingsSaveManager.settingsSave.LanguageCode + "/" + path;
-        fileLines = File.ReadAllLines(path).ToList();
-        return (fileLines);
-    }
-    public List<string> DraftingАProposalRoot(string path)
-    {
-        path = Application.streamingAssetsPath + "/081/" + path;
-        fileLines = File.ReadAllLines(path).ToList();
-        return (fileLines);
-    }
 
     public IEnumerator SimplePrintTxt(List<string> fileLines, TMP_Text txt, int LineNumber, float speedTxt)
     {

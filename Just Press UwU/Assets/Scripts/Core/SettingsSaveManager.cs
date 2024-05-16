@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
+using Tiradox;
 
 public class SettingsSaveManager : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class SettingsSaveManager : MonoBehaviour
         {
             settingsSave = new SettingsSave();
         }
+
+        if(settingsSave.LanguageCode != null)
+        {
+            LocalizationManager.SetLocalization(settingsSave.LanguageCode);
+        }
     }
 
     private void OnApplicationQuit()
@@ -38,6 +44,6 @@ public class SettingsSaveManager : MonoBehaviour
 [Serializable]
 public class SettingsSave
 {
-    public string LanguageCode = "RUS";
+    public string LanguageCode = null;
     public int GameStage = 0;
 }

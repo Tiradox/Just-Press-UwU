@@ -32,7 +32,7 @@ public class CuringFromCapsule : MonoBehaviour
             Cat.Play();
             GameManager.uCan = false;
 
-            fileLines = DS.DraftingАProposal(@"UI\ExitTxt.txt");
+            //fileLines = DS.DraftingАProposal(@"UI\ExitTxt.txt");
             exitTxt.text = fileLines[0];
         }
     }

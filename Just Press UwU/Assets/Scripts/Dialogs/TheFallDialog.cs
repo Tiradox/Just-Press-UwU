@@ -43,7 +43,7 @@ public class TheFallDialog : MonoBehaviour
         {
             d = Dialog1;
             Barrier.SetActive(true);
-            fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheFallExit.txt");
+            //fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheFallExit.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
             WTD = 1;
         }
@@ -76,7 +76,7 @@ public class TheFallDialog : MonoBehaviour
         {
             GameManager.uCan = false;
             d = Dialog2;
-            fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheFallExit2.txt");
+            //fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheFallExit2.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
             WTD = 1;
         }
@@ -103,7 +103,7 @@ public class TheFallDialog : MonoBehaviour
         {
             GameManager.uCan = false;
             d = Dialog3;
-            fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheDoor.txt");
+            //fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheDoor.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
             WTD = 1;
         }
@@ -142,7 +142,7 @@ public class TheFallDialog : MonoBehaviour
         {
             GameManager.uCan = false;
             d = Dialog4;
-            fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheCristall.txt");
+            //fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheCristall.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
             WTD = 1;
         }
@@ -171,7 +171,7 @@ public class TheFallDialog : MonoBehaviour
         {
             GameManager.uCan = false;
             d = Dialog5;
-            fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheTree.txt");
+            //fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheTree.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
             WTD = 1;
         }
@@ -223,7 +223,7 @@ public class TheFallDialog : MonoBehaviour
             DS.YouCanCont = false;
             GameManager.uCan = false;
             d = ParcurZoneDialog1;
-            fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
+            //fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
             WTD = 1;
         }
@@ -252,7 +252,7 @@ public class TheFallDialog : MonoBehaviour
             DS.YouCanCont = false;
             GameManager.uCan = false;
             d = ParcurZoneDialog2;
-            fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
+            //fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
             DS.MesOpen(fileLines, fileLines[0], 5, 0.03f);
             WTD = 1;
         }
@@ -287,7 +287,7 @@ public class TheFallDialog : MonoBehaviour
             DS.YouCanCont = false;
             GameManager.uCan = false;
             d = FirstUpKey;
-            fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
+            //fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
             DS.MesOpen(fileLines, fileLines[0], 12, 0.03f);
             WTD = 1;
         }
@@ -325,7 +325,7 @@ public class TheFallDialog : MonoBehaviour
             DS.YouCanCont = false;
             GameManager.uCan = false;
             d = FirstUpKey2;
-            fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
+            //fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
             DS.MesOpen(fileLines, fileLines[0], 18, 0.03f);
             WTD = 1;
         }

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using Tiradox;
 
 public class TypewriterScript : MonoBehaviour
 {
@@ -13,18 +13,14 @@ public class TypewriterScript : MonoBehaviour
     public PlayableDirector Cat4;
     public Ticket Ti;
     public Ticket2 Ti2;
-    protected List<string> fileLines;
-    protected List<string> fileLines2;
     public string path;
     public DialogueSystem DS;
     public Text readTex;
     public bool end;
-    
 
-    public void Start()
+    private void Start()
     {
-        fileLines = DS.DraftingАProposal("UI/Ty.txt");
-        readTex.text = fileLines[0];
+        readTex.text = LocalizationManager.GetText("Read");
     }
 
     public void UpT()
@@ -39,17 +35,18 @@ public class TypewriterScript : MonoBehaviour
         Application.Quit();
     }
 
-    public void OpenT()
+    public void Print()
     {
-        fileLines2 = DS.DraftingАProposalRoot("root_files/not identified 3/[ Typewriter ].txt");
-        if (!isOpen && GameManager.uCan)
+        if (!GameManager.uCan) return;
+
+        if (!isOpen)
         {
-            this.gameObject.GetComponent<Animator>().SetTrigger("Open");
+            GetComponent<Animator>().SetTrigger("Open");
             ClickAS.Play();
             isOpen = true;
             StartCoroutine(Ct3());
         }
-        if (isOpen && GameManager.uCan && !Ti.firstTime && fileLines2[0] == "What to print? >su_file.qr" && !end)
+        if (isOpen && !Ti.firstTime && FileHelper.Read("") == "What to print? >su_file.qr" && !end)
         {
             GameManager.uCan = false;
             Cat4.Play();

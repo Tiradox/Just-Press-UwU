@@ -39,7 +39,7 @@ public class TheFall : MonoBehaviour
 
     private IEnumerator StartS()
     {
-        fileLines = DS.DraftingАProposal(@"Dialogues\TheFall\Dictor.txt");
+        //fileLines = DS.DraftingАProposal(@"Dialogues\TheFall\Dictor.txt");
         yield return new WaitForSeconds(1f);
         Cat.Play();
     }
