@@ -4,7 +4,6 @@ using UnityEngine.Playables;
 public class TheColader : MonoBehaviour
 {
     public bool itAct = true;
-    public GameManager GM;
     private PlayableDirector cat;
     public GameObject Glitshs;
     public ParticleSystem ps;
@@ -31,7 +30,7 @@ public class TheColader : MonoBehaviour
     {
         itAct = false;
         cat.Play();
-        GM.youCanAct = false;
+        GameManager.uCan = false;
         gameObject.GetComponent<InteractionObject>().IntImgOff();
     }
 
@@ -44,7 +43,7 @@ public class TheColader : MonoBehaviour
 
     public void catIsEnd()
     {
-        GM.youCanAct = true;
+        GameManager.uCan = true;
         StartCoroutine(TCD.EndKey());
         D1SM.TheColAct = true;
     }

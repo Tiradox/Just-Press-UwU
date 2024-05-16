@@ -9,7 +9,6 @@ public class TypewriterScript : MonoBehaviour
     public AudioSource ClickAS;
     public AudioSource UpAS;
     private bool isOpen;
-    public GameManager GM;
     public PlayableDirector Cat3;
     public PlayableDirector Cat4;
     public Ticket Ti;
@@ -43,16 +42,16 @@ public class TypewriterScript : MonoBehaviour
     public void OpenT()
     {
         fileLines2 = DS.DraftingАProposalRoot("root_files/not identified 3/[ Typewriter ].txt");
-        if (!isOpen && GM.youCanAct)
+        if (!isOpen && GameManager.uCan)
         {
             this.gameObject.GetComponent<Animator>().SetTrigger("Open");
             ClickAS.Play();
             isOpen = true;
             StartCoroutine(Ct3());
         }
-        if (isOpen && GM.youCanAct && !Ti.firstTime && fileLines2[0] == "What to print? >su_file.qr" && !end)
+        if (isOpen && GameManager.uCan && !Ti.firstTime && fileLines2[0] == "What to print? >su_file.qr" && !end)
         {
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             Cat4.Play();
             end = true;
         }
@@ -60,20 +59,20 @@ public class TypewriterScript : MonoBehaviour
 
     private IEnumerator Ct3()
     {
-        GM.youCanAct = false;
+        GameManager.uCan = false;
         yield return new WaitForSeconds(2.5f);
         Cat3.Play();
     }
 
     public void EndCt3()
     {
-        GM.youCanAct = true;
+        GameManager.uCan = true;
         Ti.Yas = true;
     }
 
     public void EndCt4()
     {
-        GM.youCanAct = true;
+        GameManager.uCan = true;
         Ti2.Yas = true;
     }
 }

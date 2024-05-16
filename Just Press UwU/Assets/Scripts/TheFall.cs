@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class TheFall : MonoBehaviour
 {
-    public GameManager GM;
     public PlayableDirector Cat;
     public DialogueSystem DS;
 

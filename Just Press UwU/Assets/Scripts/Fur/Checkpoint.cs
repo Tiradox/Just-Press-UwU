@@ -12,14 +12,12 @@ public class Checkpoint : MonoBehaviour
     public D1SaveManager D1S;
     private Transform spavnPoint;
     public GameObject PlayerPrafab;
-    public GameManager GM;
     private TheFallDialog TFD;
     private GameObject connectionRestoredTex;
 
     private void Start()
     {
         spavnPoint = transform.Find("SpavnPoint").GetComponent<Transform>();
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         TFD = GameObject.Find("TheFallDialog").GetComponent<TheFallDialog>();
         connectionRestoredTex = GameObject.Find("ConnectionRestoredTex");
 
@@ -51,7 +49,7 @@ public class Checkpoint : MonoBehaviour
         {
             TFD.Dialog2();
         }
-        GM.youCanAct = false;
+        GameManager.uCan = false;
         StartCoroutine(SaveAnim());
         D1S.spavnPlase = SaveInt;
         D1S.spavnPlaseName = SceneManager.GetActiveScene().name;
@@ -70,7 +68,7 @@ public class Checkpoint : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         if (D1S.itFell)
         {
-            GM.youCanAct = true;
+            GameManager.uCan = true;
         }
     }
 

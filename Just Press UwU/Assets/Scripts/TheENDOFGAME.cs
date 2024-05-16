@@ -6,22 +6,19 @@ public class TheENDOFGAME : MonoBehaviour
 {
     public Sprite sRu;
     public Sprite sEn;
-    public GameManager GM;
     public SpriteRenderer sr;
 
     private void Start()
     {
-        GM.stage = 99;
+        SettingsSaveManager.settingsSave.GameStage = 99;
 
-        if(GM.language == "RU")
+        if (SettingsSaveManager.settingsSave.LanguageCode == "RUS")
         {
             sr.sprite = sRu;
         }
-        else if (GM.language == "EN")
+        else if (SettingsSaveManager.settingsSave.LanguageCode == "ENG")
         {
             sr.sprite = sEn;
         }
-
-        GM.SaveSettings();
     }
 }

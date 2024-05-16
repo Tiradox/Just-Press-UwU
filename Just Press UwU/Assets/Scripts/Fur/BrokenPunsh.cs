@@ -11,7 +11,6 @@ public class BrokenPunsh : MonoBehaviour
     private float newJumpForce;
     private GameObject PlayerPoint;
     public GameObject Player;
-    private GameManager GM;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private bool boolPush = false;
@@ -26,7 +25,6 @@ public class BrokenPunsh : MonoBehaviour
     private void Start()
     {
         PlayerPoint = transform.Find("PlayerPoint").gameObject;
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         sr = GetComponent<SpriteRenderer>();
 
         if(D1SM.PunsIsRep)
@@ -63,7 +61,7 @@ public class BrokenPunsh : MonoBehaviour
         {
             this.gameObject.GetComponent<PlayableDirector>().Play();
             Player.transform.position = PlayerPoint.transform.position;
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             youCanInt = false;
             this.gameObject.GetComponent<InteractionObject>().IntImgOff();
         }
@@ -86,7 +84,7 @@ public class BrokenPunsh : MonoBehaviour
 
     private IEnumerator holdJump()
     {
-        GM.youCanAct = true;
+        GameManager.uCan = true;
         boolPush = true;
         yield return new WaitForSeconds(1.7f);
         boolPush = false;

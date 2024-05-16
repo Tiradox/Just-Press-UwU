@@ -14,7 +14,6 @@ public class MusicMan : MonoBehaviour
     public AudioSource MainAu;
     private bool itPlay;
     public int whatIsThisMusicMan;
-    private GameManager GM;
     private D1SaveManager D1S;
     private Animator musicManCountAnim;
     public Sprite endSprite;
@@ -26,7 +25,6 @@ public class MusicMan : MonoBehaviour
     void Start()
     {
         GlobalEventManager.OnPlayerInst += PlayerInst;
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         D1S = GameObject.Find("Saves").GetComponent<D1SaveManager>();
         musicManCountAnim = GameObject.Find("MusicMansCount").GetComponent<Animator>();
 
@@ -55,13 +53,13 @@ public class MusicMan : MonoBehaviour
             MainAu.mute = true;
             itPlay = true;
             gameObject.GetComponent<InteractionObject>().IntImgOff();
-            GM.youCanAct = false;
+            GameManager.uCan = false;
         }
     }
 
     public void EndPlay()
     {
-        GM.youCanAct = true;
+        GameManager.uCan = true;
         if(_turnOnAudioAfterPlay)
         {
             MainAu.mute = false;

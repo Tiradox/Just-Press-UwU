@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
     public Vector2 dir;
-    private GameManager GM;
     public AudioSource BoostAu;
     public CinemachineVirtualCamera CameraRen;
     public SpriteRenderer spriteRenderer;
@@ -45,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collision>();
         anim = GetComponent<Animator>();
-        GM = FindObjectOfType<GameManager>();
         BoostAu = transform.Find("Audio Source").GetComponent<AudioSource>();
         CameraRen = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -55,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (GM.youCanAct)
+        if (GameManager.uCan)
         {
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
@@ -128,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Dash()
     {
-        GM.youCanAct = false;
+        GameManager.uCan = false;
         StartCoroutine(DashWait());
     }
 
@@ -143,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(0f, 0f);
         rb.velocity += Vector2.up * dashSpeed;
         speed = 3;
-        GM.youCanAct = true;
+        GameManager.uCan = true;
 
         rb.gravityScale = 0;
         GetComponent<BetterJumping>().enabled = false;

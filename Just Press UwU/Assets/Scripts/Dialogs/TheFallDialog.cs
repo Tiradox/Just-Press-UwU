@@ -1,14 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TheFallDialog : MonoBehaviour
 {
-    public GameManager GM;
     public DialogueSystem DS;
     public CuringFromCapsule CFC;
     public TheChatDialog TCD;
@@ -70,7 +65,7 @@ public class TheFallDialog : MonoBehaviour
         else if (WTD == 4)
         {
             DS.MesExit();
-            GM.youCanAct = true;
+            GameManager.uCan = true;
             WTD = 0;
         }
     }
@@ -79,7 +74,7 @@ public class TheFallDialog : MonoBehaviour
     {
         if (WTD == 0)
         {
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             d = Dialog2;
             fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheFallExit2.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
@@ -97,8 +92,7 @@ public class TheFallDialog : MonoBehaviour
             WTD = 0;
             Barrier.SetActive(false);
             Ch.SetSave();
-            GM.stage = 3;
-            GM.SaveSettings();
+            SettingsSaveManager.settingsSave.GameStage = 3;
         }
 
     }
@@ -107,7 +101,7 @@ public class TheFallDialog : MonoBehaviour
     {
         if (WTD == 0 && !D1S.triggerDialoge[0])
         {
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             d = Dialog3;
             fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheDoor.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
@@ -136,7 +130,7 @@ public class TheFallDialog : MonoBehaviour
         else if (WTD == 5)
         {
             DS.MesExit();
-            GM.youCanAct = true;
+            GameManager.uCan = true;
             D1S.triggerDialoge[0] = true;
             WTD = 0;
         }
@@ -146,7 +140,7 @@ public class TheFallDialog : MonoBehaviour
     {
         if (WTD == 0 && !D1S.triggerDialoge[1])
         {
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             d = Dialog4;
             fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheCristall.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
@@ -165,7 +159,7 @@ public class TheFallDialog : MonoBehaviour
         else if (WTD == 3)
         {
             DS.MesExit();
-            GM.youCanAct = true;
+            GameManager.uCan = true;
             D1S.triggerDialoge[1] = true;
             WTD = 0;
         }
@@ -175,7 +169,7 @@ public class TheFallDialog : MonoBehaviour
     {
         if (WTD == 0 && !D1S.triggerDialoge[2])
         {
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             d = Dialog5;
             fileLines = DS.DraftingАProposal(@"Dialogues\D1\TheTree.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
@@ -216,7 +210,7 @@ public class TheFallDialog : MonoBehaviour
         {
             stateDrivenCameraAnim.SetTrigger("MC");
             DS.MesExit();
-            GM.youCanAct = true;
+            GameManager.uCan = true;
             D1S.triggerDialoge[2] = true;
             WTD = 0;
         }
@@ -227,7 +221,7 @@ public class TheFallDialog : MonoBehaviour
         if (WTD == 0 && !D1S.triggerDialoge[3])
         {
             DS.YouCanCont = false;
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             d = ParcurZoneDialog1;
             fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
             DS.MesOpen(fileLines, fileLines[0], 1, 0.03f);
@@ -246,7 +240,7 @@ public class TheFallDialog : MonoBehaviour
         else if (WTD == 3)
         {
             DS.MesExit();
-            GM.youCanAct = true;
+            GameManager.uCan = true;
             D1S.triggerDialoge[3] = true;
             WTD = 0;
         }
@@ -256,7 +250,7 @@ public class TheFallDialog : MonoBehaviour
         if (WTD == 0 && !D1S.triggerDialoge[4])
         {
             DS.YouCanCont = false;
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             d = ParcurZoneDialog2;
             fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
             DS.MesOpen(fileLines, fileLines[0], 5, 0.03f);
@@ -280,7 +274,7 @@ public class TheFallDialog : MonoBehaviour
         else if (WTD == 4)
         {
             DS.MesExit();
-            GM.youCanAct = true;
+            GameManager.uCan = true;
             D1S.triggerDialoge[4] = true;
             WTD = 0;
         }
@@ -291,7 +285,7 @@ public class TheFallDialog : MonoBehaviour
         if (WTD == 0)
         {
             DS.YouCanCont = false;
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             d = FirstUpKey;
             fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
             DS.MesOpen(fileLines, fileLines[0], 12, 0.03f);
@@ -320,7 +314,7 @@ public class TheFallDialog : MonoBehaviour
         else if (WTD == 5)
         {
             DS.MesExit();
-            GM.youCanAct = true;
+            GameManager.uCan = true;
             WTD = 0;
         }
     }
@@ -329,7 +323,7 @@ public class TheFallDialog : MonoBehaviour
         if (WTD == 0)
         {
             DS.YouCanCont = false;
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             d = FirstUpKey2;
             fileLines = DS.DraftingАProposal(@"Dialogues\D1\ParcurAndKeys.txt");
             DS.MesOpen(fileLines, fileLines[0], 18, 0.03f);
@@ -343,7 +337,7 @@ public class TheFallDialog : MonoBehaviour
         else if (WTD == 2)
         {
             DS.MesExit();
-            GM.youCanAct = true;
+            GameManager.uCan = true;
             WTD = 0;
         }
     }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Playables;
 
 public class DarkRoom : MonoBehaviour
@@ -8,17 +6,13 @@ public class DarkRoom : MonoBehaviour
     private PlayableDirector gatePd;
     public GameObject gateHitbox;
     private GameObject Player;
-    private GameManager GM;
     public D1SaveManager D1S;
-
-
 
     public void Start()
     {
         GlobalEventManager.OnPlayerInst += PlayerInst;
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         D1S = GameObject.Find("Saves").GetComponent<D1SaveManager>();
-        gatePd = this.gameObject.GetComponent<PlayableDirector>();
+        gatePd = gameObject.GetComponent<PlayableDirector>();
 
         if (D1S.dorHasOpen)
         {
@@ -39,10 +33,10 @@ public class DarkRoom : MonoBehaviour
 
     public void GateAnim()
     {
-        if(Player.GetComponent<PlayerSet>().hasGateKey && GM.youCanAct)
+        if(Player.GetComponent<PlayerSet>().hasGateKey && GameManager.uCan)
         {
             gatePd.Play();
-            this.gameObject.GetComponent<InteractionObject>().IntImgOff();
+            gameObject.GetComponent<InteractionObject>().IntImgOff();
         }
     }
 
@@ -56,7 +50,7 @@ public class DarkRoom : MonoBehaviour
     {
         if (collision.tag == "Player" && !D1S.dorHasOpen && Player.GetComponent<PlayerSet>().hasGateKey)
         {
-            this.gameObject.GetComponent<InteractionObject>().IntImgOn();
+            gameObject.GetComponent<InteractionObject>().IntImgOn();
         }
     }
 
@@ -64,7 +58,7 @@ public class DarkRoom : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            this.gameObject.GetComponent<InteractionObject>().IntImgOff();
+            gameObject.GetComponent<InteractionObject>().IntImgOff();
         }
     }
 }

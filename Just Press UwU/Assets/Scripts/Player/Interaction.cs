@@ -8,15 +8,10 @@ public class Interaction : MonoBehaviour
     public Vector2 intPos;
     public LayerMask InteractionLayer;
     public Vector2 intRange;
-    private GameManager GM;
 
-    private void Start()
-    {
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && GM.youCanAct)
+        if (Input.GetKeyDown(KeyCode.E) && GameManager.uCan)
         {
             Collider2D furnet = Physics2D.OverlapBox((Vector2)transform.position + intPos, intRange, 0f, InteractionLayer);
             if (furnet != null) furnet.GetComponent<InteractionObject>().ActivateInt();

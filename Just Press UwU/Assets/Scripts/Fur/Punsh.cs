@@ -8,7 +8,6 @@ public class Punsh : MonoBehaviour
     private float newJumpForce;
     private GameObject PlayerPoint;
     public GameObject Player;
-    private GameManager GM;
     private Rigidbody2D rb;
     private PlayableDirector _playableDirector;
     private InteractionObject _interactionObject;
@@ -19,7 +18,6 @@ public class Punsh : MonoBehaviour
     {
         GlobalEventManager.OnPlayerInst += PlayerInst;
         PlayerPoint = transform.Find("PlayerPoint").gameObject;
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         _playableDirector = GetComponent<PlayableDirector>();
         _interactionObject = GetComponent<InteractionObject>();
     }
@@ -50,7 +48,7 @@ public class Punsh : MonoBehaviour
         {
             _playableDirector.Play();
             Player.transform.position = PlayerPoint.transform.position;
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             youCanInt = false;
             _interactionObject.IntImgOff();
         }
@@ -69,7 +67,7 @@ public class Punsh : MonoBehaviour
 
     private IEnumerator holdJump()
     {
-        GM.youCanAct = true;
+        GameManager.uCan = true;
         boolPush = true;
         yield return new WaitForSeconds(1.7f);
         boolPush = false;

@@ -8,7 +8,6 @@ public class GameUiManager : MonoBehaviour
 {
     private Animator CanAnim;
 
-    private GameManager GM;
     private PlayerMovement PV;
     private PlayerSet PS;
 
@@ -46,14 +45,13 @@ public class GameUiManager : MonoBehaviour
     void Awake()
     {
         GlobalEventManager.OnAbilityLoadad += AbilityLoaded;
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         CanAnim = GetComponent<Animator>();
         Spell = Dash;
     }
 
     void Update()
     {
-        if (GM.youCanAct)
+        if (GameManager.uCan)
         {
             if (Input.GetKeyDown(KeyCode.LeftShift) && ThisCharged && youCanUseIt)
             {

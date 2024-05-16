@@ -6,7 +6,6 @@ public class Seed : MonoBehaviour
 {
     private GameObject Player;
     public Transform TpPoint;
-    public GameManager GM;
     public PlayableDirector PD;
     public AudioSource au2;
     public Animator stateDrivenCameraAnim;
@@ -31,7 +30,7 @@ public class Seed : MonoBehaviour
     public void PicUp()
     {
         Player.GetComponent<PlayerMovement>().itCanRun = false;
-        GM.youCanAct = false;
+        GameManager.uCan = false;
         Player.transform.position = TpPoint.position;
         PD.Play();
         au2.mute = true;
@@ -40,7 +39,7 @@ public class Seed : MonoBehaviour
     public void StartOfTheBatle()
     {
         Player.GetComponent<PlayerMovement>().itCanRun = true;
-        GM.youCanAct = true;
+        GameManager.uCan = true;
         StartCoroutine(BatStart());
     }
 

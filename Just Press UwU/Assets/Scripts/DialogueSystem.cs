@@ -17,8 +17,6 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] public GameObject MesBoxStrel;
     [SerializeField] private AudioSource AU;
 
-    GameManager GM;
-
     protected List<string> fileLines;
 
     public bool YouCanCont = false;
@@ -26,14 +24,9 @@ public class DialogueSystem : MonoBehaviour
 
     private string _currentText;
 
-    public void Awake()
-    {
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
-
     public List<string> DraftingАProposal(string path)
     {
-        path = Application.streamingAssetsPath + "/_Text/" + GM.language + "/" + path;
+        path = Application.streamingAssetsPath + "/_Text/" + SettingsSaveManager.settingsSave.LanguageCode + "/" + path;
         fileLines = File.ReadAllLines(path).ToList();
         return (fileLines);
     }
@@ -79,23 +72,23 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-    public IEnumerator TxtAnimation(List<string> fileLines, int LineNumber, GameObject im, float speedTxt, GameManager GM, bool TheEnd)
+    public IEnumerator TxtAnimation(List<string> fileLines, int LineNumber, GameObject im, float speedTxt, bool TheEnd)
     {
         for (int i = 0; i != fileLines[((LineNumber + 1) * 3) - 2].Length; i++)
         {
             yield return new WaitForSeconds(speedTxt);
             im.transform.GetChild(i).GetComponent<Letter>().ActivationL();
         }
-        if (TheEnd) GM.youCanAct = true;
+        if (TheEnd) GameManager.uCan = true;
     }
-    public IEnumerator TxtAnimation(List<string> fileLines, int LineNumber, GameObject im, float speedTxt, int txtShift, GameManager GM, bool TheEnd)
+    public IEnumerator TxtAnimation(List<string> fileLines, int LineNumber, GameObject im, float speedTxt, int txtShift, bool TheEnd)
     {
         for (int i = 0 + txtShift; i != fileLines[((LineNumber + 1) * 3) - 2].Length + txtShift; i++)
         {
             yield return new WaitForSeconds(speedTxt);
             im.transform.GetChild(i).GetComponent<Letter>().ActivationL();
         }
-        if (TheEnd) GM.youCanAct = true;
+        if (TheEnd) GameManager.uCan = true;
     }
 
     public void DESTROYTxt(List<string> fileLines, int LineNumber, GameObject im)

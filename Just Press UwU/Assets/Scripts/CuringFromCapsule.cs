@@ -8,7 +8,6 @@ using TMPro;
 public class CuringFromCapsule : MonoBehaviour
 {
     private bool DorOpen = false;
-    public GameManager GM;
     public TMP_Text exitTxt;
     public PlayableDirector Cat;
     public AudioSource Au1;
@@ -31,7 +30,7 @@ public class CuringFromCapsule : MonoBehaviour
         {
             stateDrivenCamAnim.SetTrigger("DC");
             Cat.Play();
-            GM.youCanAct = false;
+            GameManager.uCan = false;
 
             fileLines = DS.DraftingАProposal(@"UI\ExitTxt.txt");
             exitTxt.text = fileLines[0];

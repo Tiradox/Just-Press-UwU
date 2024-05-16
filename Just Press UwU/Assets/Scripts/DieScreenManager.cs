@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class DieScreenManager : MonoBehaviour
 {
-    public GameManager GM;
     public DialogueSystem DS;
     protected List<string> fileLines;
     public Text txt1;

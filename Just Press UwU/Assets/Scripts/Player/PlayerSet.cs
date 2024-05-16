@@ -21,7 +21,6 @@ public class PlayerSet : MonoBehaviour
 
     public GameUiManager GUIM;
     public GameObject DiePartSys;
-    private GameManager GM;
     private PlayerDie PD;
     private Animator DarkCol;
 
@@ -57,7 +56,6 @@ public class PlayerSet : MonoBehaviour
     private void Start()
     {
         GUIM = GameObject.Find("CanvasUIManager").GetComponent<GameUiManager>();
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         PD = GameObject.Find("GameManager").GetComponent<PlayerDie>();
         DarkCol = GameObject.Find("DarkCol").GetComponent<Animator>();
         au2 = transform.Find("Audio Source 2").GetComponent<AudioSource>();
@@ -119,7 +117,7 @@ public class PlayerSet : MonoBehaviour
     {
         ControllerOfShake.Instance.InstShakeCamera(8f, 3f);
         PD.DaIgrocUmer0();
-        GM.youCanAct = false;
+        GameManager.uCan = false;
         gameObject.GetComponent<Rigidbody2D>().simulated = false;
         Instantiate(DiePartSys, transform.position, transform.rotation);
         gameObject.GetComponent<Animator>().SetTrigger("Die");
@@ -167,14 +165,14 @@ public class PlayerSet : MonoBehaviour
             platformerRestoreEvent.Invoke();
         }
         au2.Play();
-        GM.youCanAct = false;
+        GameManager.uCan = false;
         StartCoroutine(TpOnPlatformerTpPointWait());
     }
 
     private IEnumerator TpOnPlatformerTpPointWait()
     {
         yield return new WaitForSeconds(0.5f);
-        GM.youCanAct = true;
+        GameManager.uCan = true;
     }
 
     [Serializable]

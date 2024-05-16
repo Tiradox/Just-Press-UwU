@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Ticket2 : MonoBehaviour
 {
-    public GameManager GM;
     public bool Yas;
     public Vector3 offSet;
     public AudioSource A4;
@@ -22,7 +21,7 @@ public class Ticket2 : MonoBehaviour
 
     public void SetPos()
     {
-        if (GM.youCanAct && Yas)
+        if (GameManager.uCan && Yas)
         {
             Vector3 def = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             this.gameObject.transform.localPosition = def - offSet;
@@ -31,12 +30,12 @@ public class Ticket2 : MonoBehaviour
 
     public void Click()
     {
-        if (firstTime && GM.youCanAct && Yas)
+        if (firstTime && GameManager.uCan && Yas)
         {
             firstTime = false;
             TTZAnim.Play("Left");
         }
-        if (GM.youCanAct && Yas)
+        if (GameManager.uCan && Yas)
         {
             TTZAnim.Play("Left");
         }
@@ -50,7 +49,7 @@ public class Ticket2 : MonoBehaviour
             DS.ListOfPaperSet(PaperG, "https://media.discordapp.net/attachments/828336084798013570/959898680998109274/The_Big_Art.png?width=993&height=559");
             A4.Play();
         }
-        else if (GM.youCanAct && Yas)
+        else if (GameManager.uCan && Yas)
         {
             TTZAnim.Play("Right");
         }

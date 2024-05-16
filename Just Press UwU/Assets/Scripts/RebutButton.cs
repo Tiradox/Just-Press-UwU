@@ -12,7 +12,6 @@ public class RebutButton : MonoBehaviour
     public Sprite[] B = new Sprite[2];
     public int[,] whb = new int[5,1];
     public GameObject[] sp = new GameObject[5];
-    public GameManager GM;
     public DialogueSystem DS;
     private bool b = true;
     public Animator RADAnim;
@@ -41,7 +40,7 @@ public class RebutButton : MonoBehaviour
 
     public void Start()
     {
-        path = Application.streamingAssetsPath + "/_Text/" + GM.language + "/Dialogues/Lm/List1.txt";
+        path = Application.streamingAssetsPath + "/_Text/" + SettingsSaveManager.settingsSave.LanguageCode + "/Dialogues/Lm/List1.txt";
     }
     public void MiniButton(int i)
     {
@@ -53,7 +52,7 @@ public class RebutButton : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if(GM.youCanAct && b)
+        if(GameManager.uCan && b)
         {
             this.gameObject.GetComponent<Animator>().SetTrigger("Open");
             A2.Play(); b = false;
@@ -65,9 +64,9 @@ public class RebutButton : MonoBehaviour
         RADAnim.SetTrigger("Down");
         A3.Play();
 
-        if (whb[0, 0] == 0 && whb[1, 0] == 1 && whb[2, 0] == 1 && whb[3, 0] == 0 && whb[4, 0] == 1 && GM.youCanAct)
+        if (whb[0, 0] == 0 && whb[1, 0] == 1 && whb[2, 0] == 1 && whb[3, 0] == 0 && whb[4, 0] == 1 && GameManager.uCan)
         {
-            GM.youCanAct = false;
+            GameManager.uCan = false;
             StartCoroutine(Deli());
         }
     }
@@ -198,13 +197,13 @@ public class RebutButton : MonoBehaviour
 
     public void EndDel()
     {
-        GM.youCanAct = true;
+        GameManager.uCan = true;
         TS.UpT();
     }
 
     public void Paper()
     {
-        if (GM.youCanAct)
+        if (GameManager.uCan)
         {
             DS.ListOfPaperSet(PaperG, File.ReadAllText(path));
             A4.Play();

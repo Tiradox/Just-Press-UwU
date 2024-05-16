@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Rep : MonoBehaviour
 {
     public D1SaveManager D1SM;
-    private GameManager GM;
     private GameObject Player;
 
     private void Start()
     {
         GlobalEventManager.OnPlayerInst += PlayerInst;
-        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         if(D1SM.RepIsUp)
         {
@@ -39,7 +35,7 @@ public class Rep : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            this.gameObject.GetComponent<InteractionObject>().IntImgOn();
+            gameObject.GetComponent<InteractionObject>().IntImgOn();
         }
     }
 
@@ -47,7 +43,7 @@ public class Rep : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            this.gameObject.GetComponent<InteractionObject>().IntImgOff();
+            gameObject.GetComponent<InteractionObject>().IntImgOff();
         }
     }
 }

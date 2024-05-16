@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class TheChatDialog : MonoBehaviour
 {
-    public GameManager GM;
     public DialogueSystem DS;
     protected List<string> fileLines4;
     public D1SaveManager D1SM;
