@@ -22,27 +22,27 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -217.6
-        inSlope: 135.19035
-        outSlope: 135.19035
+        value: -45.2
+        inSlope: 352.22232
+        outSlope: 352.22232
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.3658055
+        outWeight: 0.21200515
       - serializedVersion: 3
         time: 0.6666667
-        value: -171.9
-        inSlope: 0.93745893
-        outSlope: 0.93745893
-        tangentMode: 0
+        value: 44.85
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
         weightedMode: 0
-        inWeight: 0.4685752
+        inWeight: 0.33333334
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Lines
+    path: Bg
     classID: 224
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -54,7 +54,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2394989458
+      path: 1346423683
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
@@ -66,7 +66,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6666667
+    m_StopTime: 0.75
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -87,30 +87,37 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -217.6
-        inSlope: 135.19035
-        outSlope: 135.19035
+        value: -45.2
+        inSlope: 352.22232
+        outSlope: 352.22232
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.3658055
+        outWeight: 0.21200515
       - serializedVersion: 3
         time: 0.6666667
-        value: -171.9
-        inSlope: 0.93745893
-        outSlope: 0.93745893
-        tangentMode: 0
+        value: 44.85
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
         weightedMode: 0
-        inWeight: 0.4685752
+        inWeight: 0.33333334
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: Lines
+    path: Bg
     classID: 224
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.75
+    functionName: PlayDialogueAfterAnim
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

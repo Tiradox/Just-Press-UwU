@@ -3,9 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
+using TMPro;
+using Tiradox;
 
 public class PreludeManager : MonoBehaviour
 {
+    [HideInInspector] public bool uCan = false;
+
+    [Header("Dialogue")]
+    [SerializeField] private Animator _dialoguePlaneAnimator;
+    [SerializeField] private TMP_Text _dialogueText;
+
+    [Header("Main Button")]
+    [SerializeField] private Animator _mainButtonAmim;
+    [SerializeField] private AudioSource _mainButtonDownAS;
+
+    [Header("Dialogues")]
+    [SerializeField] private DialogueSO _introDialogue;
+    [SerializeField] private DialogueSO[] _dialodues;
+
     [Header("Windows")]
     public GameObject imPlayer;
 
@@ -15,7 +31,6 @@ public class PreludeManager : MonoBehaviour
     public Animator BAnim;
     public Animator CamAin;
     public AudioSource MainMusic;
-    public AudioSource AUButton;
     public AudioSource AUZ3;
     public AudioSource AUZ4;
     public AudioSource AUZ6_2;
@@ -34,25 +49,37 @@ public class PreludeManager : MonoBehaviour
 
     public PlayableDirector CatFin;
 
-    public void Start()
+    private IEnumerator Start()
     {
-        StartCoroutine(Mbutton());
+        yield return new WaitForEndOfFrame();
+        DialogueManager.singelton.StartDialogue(_introDialogue, this);
     }
 
-    public void BTrigger()
+    public void RaiseTheButton()
     {
-        if (GameManager.uCan && WTD!=3)
+        _mainButtonAmim.SetTrigger("Raise");
+    }
+    public void RaisingTheButtonEnd()
+    {
+        uCan = true;
+    }
+    public void OnMainButtonDown()
+    {
+        if (!uCan) return;
+        uCan = false;
+
+        _mainButtonDownAS.Play();
+        if (WTD < 3)
         {
-            StartCoroutine(Mbutton());
-            BAnim.SetTrigger("Click");
-            AUButton.Play();
+            BAnim.SetTrigger("Down");
+            DialogueManager.singelton.StartDialogue(_dialodues[WTD], this);
+            WTD++;
         }
-        else if (GameManager.uCan && WTD == 3)
+        else
         {
-            BAnim.SetTrigger("Click2");
-            AUButton.Play();
-            //fileLines2 = DS.DraftingАProposalRoot("root_files/not identified 2/4787/[ root file 1 ].txt");
-            if (_rootFileText[5] == "pix 5 [ reboot ] - on" && _rootFileText[11] == ">MagicImergentiv3310")
+            BAnim.SetTrigger("DirtDown");
+            string[] fileLines = FileHelper.ReadLines("Здесь должен быть ваш путь");
+            if (fileLines[5] == "pix 5 [ reboot ] - on" && fileLines[11] == ">MagicImergentiv3310")
             {
                 CatFin.Play();
                 SettingsSaveManager.settingsSave.GameStage = 2;
@@ -67,7 +94,7 @@ public class PreludeManager : MonoBehaviour
         if (WTD == 0)
         {
             MainMusic.volume = 0f;
-            GameManager.uCan = false;
+            uCan = false;
 
             //imPlayer.GetComponent<GridLayoutGroup>().constraintCount = int.Parse(fileLines[0]);
             //DS.PrintTxt(fileLines, 0, imPlayer);
@@ -177,7 +204,7 @@ public class PreludeManager : MonoBehaviour
         }
         else if (WTD == 2)
         {
-            GameManager.uCan = false;
+            uCan = false;
             Cat1.Play();
             //DS.DESTROYTxt(fileLines, 13, imPlayer);
 
@@ -246,7 +273,7 @@ public class PreludeManager : MonoBehaviour
             CamAin.SetTrigger("Run");
             yield return new WaitForSeconds(0.35f);
             WTD = 3;
-            GameManager.uCan = true;
+            uCan = true;
         }
     }
 }
